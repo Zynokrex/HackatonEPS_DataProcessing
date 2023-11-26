@@ -5,6 +5,8 @@ import requests
 import pandas as pd
 import csv 
 
+#%
+#function for requesting to the API the use of a model
 app = FastAPI()
 @app.get("/vision")
 def read_vision(img_url):
@@ -25,12 +27,16 @@ def read_vision(img_url):
     return json_response
 
 #%%
+#Reading the extracted urls of images
 df = pd.read_csv('urls.csv', index_col=0, sep = ';').reset_index()
 
 
 # %%
+#getting a random sample of the df to avoid surpasing the request limit
 description_df = df.sample(n=3600, random_state=434143)
+
 # %%
+#saving per batches the requests sent to the api
 with open('save_descriptions.csv', 'w', newline='') as file:
     for idx in description_df.index:
         descr = read_vision(description_df['Url'][idx])
@@ -38,4 +44,3 @@ with open('save_descriptions.csv', 'w', newline='') as file:
         if idx%10 == 0:
             file.flush()
 file.close()
-# %%
