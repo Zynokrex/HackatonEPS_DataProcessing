@@ -4,7 +4,7 @@ import json
 from itertools import chain
 from collections import ChainMap
 
-with open('response.json') as f:
+with open('./Data/response.json') as f:
     data_dict = json.load(f)
 
 # %%

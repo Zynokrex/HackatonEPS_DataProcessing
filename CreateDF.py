@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 
 descr_list = []
 
-with open('save_descriptions.csv', mode="r") as csvfile:
+with open('./Data/save_descriptions.csv', mode="r") as csvfile:
     reader = csv.reader(csvfile, delimiter=";")
     for entry in reader:
         descr_list.append(entry)
@@ -16,7 +16,7 @@ csvfile.close()
 
 # %%
 descr_list2 = []
-with open('save_descriptions_2.csv', mode="r") as csvfile2:
+with open('./Data/save_descriptions_2.csv', mode="r") as csvfile2:
     reader = csv.reader(csvfile2, delimiter=";")
     for entry in reader:
         descr_list2.append(entry)
@@ -54,6 +54,6 @@ labeled_df = labeled_df.join(pd.DataFrame.sparse.from_spmatrix(mlb.fit_transform
 inform_df = pd.DataFrame((labeled_df.sum(
 )/(labeled_df.sum().num_labels)) * 100).T.drop(columns=['score', 'num_labels'])
 # %%
-inform_df.to_csv('pcntg_labels.csv')
-labeled_df.to_csv('Processed_dataset.csv')
+inform_df.to_csv('./Data/pcntg_labels.csv')
+labeled_df.to_csv('.Data/Processed_dataset.csv')
 # %%

@@ -28,13 +28,13 @@ def read_vision(img_url):
 
 
 # %%
-df = pd.read_csv('urls.csv', index_col=0, sep=';').reset_index()
+df = pd.read_csv('./Data/urls.csv', index_col=0, sep=';').reset_index()
 
 
 # %%
 description_df = df.sample(n=3600, random_state=434143)
 # %%
-with open('save_descriptions.csv', 'w', newline='') as file:
+with open('./Data/save_descriptions.csv', 'w', newline='') as file:
     for idx in description_df.index:
         descr = read_vision(description_df['Url'][idx])
         file.write(str(descr) + ";")
